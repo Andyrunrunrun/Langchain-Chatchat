@@ -143,7 +143,7 @@ async def kb_chat(query: str = Body(..., description="用户输入", examples=["
                 model_name=model,
                 temperature=temperature,
                 max_tokens=max_tokens,
-                callbacks=callbacks,
+                callbacks=callbacks,    
             )
             # TODO： 视情况使用 API
             # # 加入reranker
@@ -160,6 +160,24 @@ async def kb_chat(query: str = Body(..., description="用户输入", examples=["
             #                                              query=query)
             #     print("------------after rerank------------------")
             #     print(docs)
+            
+            # 对文档重新排序
+            docs_num = len(docs)
+            if docs_num > 1:
+                docs_scores = [doc["score"] for doc in docs]
+                sorted_id = sorted(range(docs_num), key=lambda k: docs_scores[k])
+                sorted_docs = [docs[sorted_id[0]]]
+                doc_cnt = 1
+                index_cnt = -1
+                while doc_cnt < docs_num:
+                    sorted_docs.insert(index_cnt, docs[sorted_id[doc_cnt]])
+                    doc_cnt += 1
+                    if index_cnt < 0:
+                        index_cnt = -index_cnt
+                    else:
+                        index_cnt = -index_cnt - 1
+                docs = sorted_docs
+
             context = "\n\n".join([doc["page_content"] for doc in docs])
 
             if len(docs) == 0:  # 如果没有找到相关文档，使用empty模板

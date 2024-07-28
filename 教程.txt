@@ -1,0 +1,16 @@
+pip install "langchain-chatchat[xinference]" -U
+pip install "xinference[all]"
+
+#启动模型服务
+XINFERENCE_MODEL_SRC=modelscope xinference-local --host 0.0.0.0 --port 9997
+
+
+
+
+#修改
+chatchat config model --default_llm_model qwen2-instruct   ##直接在yaml文件里修改
+
+chatchat kb -r #测试
+
+#启动项目
+chatchat start -a
