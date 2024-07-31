@@ -185,3 +185,17 @@ data/knowledge_base/samples/content/test_files/langchain-ChatGLM_closed.csv
 data/knowledge_base/samples/content/test_files/langchain-ChatGLM_closed.xlsx
 data/knowledge_base/samples/content/test_files/langchain-ChatGLM_open.csv
 data/knowledge_base/samples/content/test_files/langchain-ChatGLM_open.xlsx
+libs/chatchat-server/data/knowledge_base/samples/content/大模型技术栈-实战与应用.md
+libs/chatchat-server/data/knowledge_base/samples/content/大模型技术栈-算法与原理.md
+libs/chatchat-server/data/knowledge_base/samples/content/大模型推理优化策略.md
+libs/chatchat-server/data/knowledge_base/samples/content/大模型应用技术原理.md
+libs/chatchat-server/data/knowledge_base/samples/content/大模型指令对齐训练原理.md
+libs/chatchat-server/data/knowledge_base/samples/content/分布式训练技术原理.md
+libs/chatchat-server/data/knowledge_base/samples/content/test_files/langchain-ChatGLM_closed.csv
+libs/chatchat-server/data/knowledge_base/samples/content/test_files/langchain-ChatGLM_closed.xlsx
+libs/chatchat-server/data/knowledge_base/samples/content/test_files/langchain-ChatGLM_open.csv
+libs/chatchat-server/data/knowledge_base/samples/content/test_files/langchain-ChatGLM_open.xlsx
+libs/chatchat-server/data/knowledge_base/samples/content/test_files/langchain.pdf
+libs/chatchat-server/data/knowledge_base/samples/content/test_files/test.txt
+libs/chatchat-server/data/knowledge_base/电焊/content/焊接操作技术速查手册.pdf
+libs/chatchat-server/data/knowledge_base/info.db

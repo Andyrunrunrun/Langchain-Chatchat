@@ -302,7 +302,7 @@ class ApiModelSettings(BaseFileSettings):
 
     model_config = SettingsConfigDict(yaml_file=CHATCHAT_ROOT / "model_settings.yaml")
 
-    DEFAULT_LLM_MODEL: str = "glm4-chat"
+    DEFAULT_LLM_MODEL: str = " glm4-chat"
     """默认选用的 LLM 名称"""
 
     DEFAULT_EMBEDDING_MODEL: str = "bge-m3"

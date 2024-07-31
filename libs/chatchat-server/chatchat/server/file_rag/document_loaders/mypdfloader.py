@@ -48,12 +48,20 @@ class RapidOCRPDFLoader(UnstructuredFileLoader):
                 total=doc.page_count, desc="RapidOCRPDFLoader context page index: 0"
             )
             for i, page in enumerate(doc):
+                keys = ('！','？', '。', '.', '!', '?')
                 b_unit.set_description(
                     "RapidOCRPDFLoader context page index: {}".format(i)
                 )
                 b_unit.refresh()
                 text = page.get_text("")
-                resp += text + "\n"
+                
+                texts = text.split('\n')
+                for te in texts:
+                    if te.endswith(keys):
+                        resp += te + '\n'
+                    else:
+                        resp += te
+                # resp += text + "\n"
 
                 img_list = page.get_image_info(xrefs=True)
                 for img in img_list:
@@ -83,8 +91,22 @@ class RapidOCRPDFLoader(UnstructuredFileLoader):
 
                         result, _ = ocr(img_array)
                         if result:
-                            ocr_result = [line[1] for line in result]
-                            resp += "\n".join(ocr_result)
+                            # 根据平均高度差区分是否分段
+                            height_diff_sum = 0
+                            if len(result) > 1:
+                                for i in range(len(result) - 1):
+                                    height_diff_sum += result[i + 1][0][3][1] - result[i][0][0][1]
+                                height_diff_avg = height_diff_sum / (len(result) - 1)
+                            else:
+                                height_diff_avg = 0
+                            for i in range(len(result) - 1):
+                                if result[i + 1][0][3][1] - result[i][0][0][1] > height_diff_avg:
+                                    resp += result[i][1] + '\n'
+                                else:
+                                    resp += result[i][1]
+
+                            # ocr_result = [line[1] for line in result]
+                            # resp += "\n".join(ocr_result)
 
                 # 更新进度
                 b_unit.update(1)
@@ -97,6 +119,6 @@ class RapidOCRPDFLoader(UnstructuredFileLoader):
 
 
 if __name__ == "__main__":
-    loader = RapidOCRPDFLoader(file_path="/Users/tonysong/Desktop/test.pdf")
+    loader = RapidOCRPDFLoader(file_path="/dev_data/studrp/huanghao/Langchain-Chatchat-new/test.pdf")
     docs = loader.load()
     print(docs)
